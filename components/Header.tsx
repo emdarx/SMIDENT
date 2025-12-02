@@ -12,7 +12,7 @@ export const Header: React.FC = () => {
           <h1 className="text-xl font-bold text-gray-800">SMIDENT</h1>
         </div>
         <span className="text-xs font-medium text-primary-600 bg-primary-50 px-2 py-1 rounded-full">
-          طراحی لبخند هوشمند
+         ساخته شده با عشق ❤️
         </span>
       </div>
     </header>

@@ -71,7 +71,7 @@ function App() {
                 processState={processState} 
               />
               <p className="text-center text-gray-400 text-[10px] mt-3 opacity-60">
-                نسخه ۱.۰.۰ - طراحی هوشمند
+                نسخه ۱.۰.۰ 
               </p>
             </div>
           </div>
