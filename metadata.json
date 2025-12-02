@@ -1,0 +1,7 @@
+{
+  "name": "SMIDENT",
+  "description": "اپلیکیشن اصلاح طرح لبخند با هوش مصنوعی",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
