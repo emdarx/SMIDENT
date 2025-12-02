@@ -1,56 +1,55 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Check, X } from 'lucide-react';
 
 export const IntroSection: React.FC = () => {
   return (
-    <div className="p-4 space-y-6">
-      <div className="bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl p-6 text-white text-center shadow-lg">
-        <h2 className="text-2xl font-black mb-2">لبخند جدیدت رو ببین!</h2>
-        <p className="text-primary-50 text-sm leading-relaxed opacity-90">
-          با هوش مصنوعی پیشرفته، بدون نیاز به مراجعه حضوری، ببین اگر دندون‌هاتو لمینت یا کامپوزیت کنی چه شکلی میشی.
+    <div className="space-y-4">
+      {/* Hero Text - Compact */}
+      <div className="text-center space-y-2">
+        <h2 className="text-2xl font-black text-gray-800 tracking-tight">
+          <span className="text-primary-600">لبخند جدیدت</span> رو ببین!
+        </h2>
+        <p className="text-sm text-gray-500 leading-relaxed max-w-[90%] mx-auto">
+          بدون مراجعه حضوری، ببین اگر دندوناتو لمینت کنی چه شکلی میشی.
         </p>
       </div>
 
-      <div className="space-y-3">
-        <h3 className="font-bold text-gray-800 flex items-center gap-2">
-          <Sparkles size={18} className="text-secondary-500" />
-          راهنمای عکاسی
-        </h3>
-        <p className="text-xs text-gray-500">برای بهترین نتیجه طبق الگوی زیر عکس بگیرید:</p>
+      {/* Compact Guide */}
+      <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+        <div className="flex items-center gap-2 mb-3">
+          <Sparkles size={16} className="text-secondary-500" />
+          <h3 className="font-bold text-gray-800 text-sm">راهنمای عکاسی</h3>
+        </div>
         
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white p-2 rounded-xl border-2 border-green-500 relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-bl-lg">
-              صحیح
+        <div className="flex gap-3">
+          {/* Correct Example */}
+          <div className="flex-1 flex flex-col gap-2">
+            <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden border-2 border-green-500/50 shadow-sm">
+              <div className="absolute top-1 right-1 bg-green-500 text-white rounded-full p-0.5">
+                <Check size={10} strokeWidth={4} />
+              </div>
+              <img 
+                src="https://i.ibb.co/d0RVk2xY/1.jpg" 
+                alt="صحیح" 
+                className="w-full h-full object-cover" 
+              />
             </div>
-            {/* Good Example: Close up Smile */}
-            <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
-                <img 
-                  src="https://i.ibb.co/d0RVk2xY/1.jpg" 
-                  alt="نمونه صحیح - لبخند باز و دندان‌های جفت شده" 
-                  className="w-full h-full object-cover" 
-                />
-            </div>
-            <p className="text-[10px] text-center text-gray-600">
-              لبخند بسته (دندان‌ها روی هم)، نور کافی
-            </p>
+            <p className="text-[10px] text-gray-500 text-center font-medium">لبخند بسته، نور کافی</p>
           </div>
 
-          <div className="bg-white p-2 rounded-xl border-2 border-red-400 relative overflow-hidden">
-             <div className="absolute top-0 right-0 bg-red-400 text-white text-[10px] px-2 py-0.5 rounded-bl-lg">
-              غلط
+          {/* Incorrect Example */}
+          <div className="flex-1 flex flex-col gap-2">
+            <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden border-2 border-red-400/50 shadow-sm opacity-80">
+               <div className="absolute top-1 right-1 bg-red-400 text-white rounded-full p-0.5">
+                <X size={10} strokeWidth={4} />
+              </div>
+              <img 
+                src="https://i.ibb.co/j90NKM7b/2.jpg" 
+                alt="غلط" 
+                className="w-full h-full object-cover grayscale" 
+              />
             </div>
-            {/* Bad Example: Open mouth / Dental Checkup style */}
-            <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
-                <img 
-                  src="https://i.ibb.co/j90NKM7b/2.jpg" 
-                  alt="نمونه غلط - دهان باز" 
-                  className="w-full h-full object-cover grayscale opacity-70" 
-                />
-            </div>
-            <p className="text-[10px] text-center text-gray-600">
-              دهان خیلی باز، زاویه نامناسب یا تاریک
-            </p>
+             <p className="text-[10px] text-gray-500 text-center font-medium">دهان باز یا تاریک</p>
           </div>
         </div>
       </div>
