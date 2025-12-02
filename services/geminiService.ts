@@ -1,9 +1,14 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export const generateSmileMakeover = async (base64Image: string): Promise<string> => {
   try {
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      throw new Error("API Key is not configured.");
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
+
     // Strip header if present (e.g., "data:image/jpeg;base64,")
     const base64Data = base64Image.includes(',') 
       ? base64Image.split(',')[1] 
