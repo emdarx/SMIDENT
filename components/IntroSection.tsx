@@ -26,7 +26,7 @@ export const IntroSection: React.FC = () => {
             {/* Good Example: Close up Smile */}
             <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
                 <img 
-                  src="https://i.ibb.co/991r3bMK/1.jpg" 
+                  src="https://i.ibb.co/d0RVk2xY/1.jpg" 
                   alt="نمونه صحیح - لبخند باز و دندان‌های جفت شده" 
                   className="w-full h-full object-cover" 
                 />
@@ -43,7 +43,7 @@ export const IntroSection: React.FC = () => {
             {/* Bad Example: Open mouth / Dental Checkup style */}
             <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
                 <img 
-                  src="https://i.ibb.co/xqqwsq2c/2.jpg" 
+                  src="https://i.ibb.co/j90NKM7b/2.jpg" 
                   alt="نمونه غلط - دهان باز" 
                   className="w-full h-full object-cover grayscale opacity-70" 
                 />
