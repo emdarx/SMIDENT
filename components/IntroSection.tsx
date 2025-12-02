@@ -34,9 +34,9 @@ export const IntroSection: React.FC = () => {
                 className="w-full h-full object-cover" 
               />
             </div>
-            <p className="text-[10px] text-gray-500 text-center font-medium">لبخند بسته، نور کافی</p>
+            <p className="text-[10px] text-gray-500 text-center font-medium">نمونه عکس صحیح</p>
           </div>
-
+ 
           {/* Incorrect Example */}
           <div className="flex-1 flex flex-col gap-2">
             <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden border-2 border-red-400/50 shadow-sm opacity-80">
@@ -49,7 +49,7 @@ export const IntroSection: React.FC = () => {
                 className="w-full h-full object-cover grayscale" 
               />
             </div>
-             <p className="text-[10px] text-gray-500 text-center font-medium">دهان باز یا تاریک</p>
+             <p className="text-[10px] text-gray-500 text-center font-medium">نمونه عکس اشتباه</p>
           </div>
         </div>
       </div>
