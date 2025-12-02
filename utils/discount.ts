@@ -46,7 +46,6 @@ export const verifyDiscountCode = (code: string): boolean => {
   const percentIndStr = numericPart.substring(4, 5);
   const checksumStr = numericPart.substring(5, 6);
 
-  const randomPart = parseInt(randomPartStr);
   const percentInd = parseInt(percentIndStr);
   const checksum = parseInt(checksumStr);
 

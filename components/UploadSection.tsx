@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Camera, UploadCloud, Loader2 } from 'lucide-react';
+import { Camera, Loader2 } from 'lucide-react';
 import { ProcessState } from '../types';
 
 interface UploadSectionProps {

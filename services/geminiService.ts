@@ -14,25 +14,27 @@ export const generateSmileMakeover = async (base64Image: string): Promise<string
       contents: {
         parts: [
           {
-            text: "Edit this image. Keep the face, skin, lips, gums and lighting exactly as they are. DO NOT change the face structure. Only modify the teeth to look like high-end, bright white, perfectly shaped ceramic veneers (Hollywood smile). The teeth should look realistic but cosmetically perfect."
-          },
-          {
             inlineData: {
               mimeType: 'image/jpeg',
               data: base64Data
             }
+          },
+          {
+            text: "Edit this image. Keep the face, skin, lips, gums and lighting exactly as they are. DO NOT change the face structure. Only modify the teeth to look like high-end, bright white, perfectly shaped ceramic veneers (Hollywood smile). The teeth should look realistic but cosmetically perfect."
           }
         ]
       }
     });
 
-    // Check for inline data (image) response
+    // Check for inline data (image) response with safe optional chaining
     const candidates = response.candidates;
     if (candidates && candidates.length > 0) {
-      const parts = candidates[0].content.parts;
-      for (const part of parts) {
-        if (part.inlineData && part.inlineData.data) {
-          return `data:image/png;base64,${part.inlineData.data}`;
+      const parts = candidates[0]?.content?.parts;
+      if (parts) {
+        for (const part of parts) {
+          if (part.inlineData && part.inlineData.data) {
+            return `data:image/png;base64,${part.inlineData.data}`;
+          }
         }
       }
     }

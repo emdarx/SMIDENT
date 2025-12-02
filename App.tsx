@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Header } from './components/Header';
 import { IntroSection } from './components/IntroSection';
 import { UploadSection } from './components/UploadSection';

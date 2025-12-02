@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export const IntroSection: React.FC = () => {
   return (
