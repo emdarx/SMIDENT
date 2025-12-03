@@ -129,16 +129,16 @@ export const ResultSection: React.FC<ResultSectionProps> = ({
                 <div className="text-right">
                   <span className="block text-xs font-bold text-gray-400 mb-1">آدرس</span>
                   <p className="text-sm text-gray-700 leading-relaxed font-medium">
-                    تهران، زعفرانیه، خیابان مقدس اردبیلی، پلاک ۱۰۰، واحد ۱
+تهران، تهرانپارس، خیابان امیری طائمه، ساختمان میخوش پلاک 125 واحد 5
                   </p>
-                </div>
+                </div> 
               </div>
 
               <a href="tel:02122334455" className="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors">
                 <Phone className="text-primary-600 flex-shrink-0" size={20} />
                 <div className="text-right flex-1">
                    <span className="block text-xs font-bold text-gray-400 mb-0.5">تلفن ثابت</span>
-                   <p className="text-sm font-bold text-gray-800 font-mono dir-ltr text-left">021 - 22 33 44 55</p>
+                   <p className="text-sm font-bold text-gray-800 font-mono dir-ltr text-left">02177746371</p>
                 </div>
               </a>
 
@@ -146,7 +146,7 @@ export const ResultSection: React.FC<ResultSectionProps> = ({
                 <Phone className="text-primary-600 flex-shrink-0" size={20} />
                 <div className="text-right flex-1">
                    <span className="block text-xs font-bold text-gray-400 mb-0.5">همراه</span>
-                   <p className="text-sm font-bold text-gray-800 font-mono dir-ltr text-left">0912 123 4567</p>
+                   <p className="text-sm font-bold text-gray-800 font-mono dir-ltr text-left">09109090921</p>
                 </div>
               </a>
             </div>

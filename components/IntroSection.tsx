@@ -32,7 +32,7 @@ export const IntroSection: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-green-900/60 to-transparent flex items-end justify-center pb-1">
                <div className="flex items-center gap-1 text-[9px] text-white font-bold bg-green-500/80 px-1.5 py-0.5 rounded-full backdrop-blur-md">
                  <Check size={8} strokeWidth={4} />
-                 <span>روشن و واضح</span>
+                 <span>نمونه صحیح</span>
                </div>
             </div>
           </div>
@@ -47,7 +47,7 @@ export const IntroSection: React.FC = () => {
              <div className="absolute inset-0 bg-gradient-to-t from-red-900/60 to-transparent flex items-end justify-center pb-1">
                <div className="flex items-center gap-1 text-[9px] text-white font-bold bg-red-500/80 px-1.5 py-0.5 rounded-full backdrop-blur-md">
                  <X size={8} strokeWidth={4} />
-                 <span>تاریک یا کج</span>
+                 <span>نمونه غلط</span>
                </div>
             </div>
           </div>
