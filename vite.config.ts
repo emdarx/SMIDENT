@@ -7,8 +7,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      // Prioritize API_KEY, but fallback to API if the user named it that way
-      'process.env.API_KEY': JSON.stringify(env.API_KEY || env.API),
+      // Prioritize ENV variables
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || ""),
     },
   };
 });

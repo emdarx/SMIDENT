@@ -2,51 +2,53 @@ import { GoogleGenAI } from "@google/genai";
 
 export const generateSmileMakeover = async (base64Image: string): Promise<string> => {
   try {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      throw new Error("API Key is not configured.");
+    if (!process.env.API_KEY) {
+      throw new Error("API Key یافت نشد. لطفاً process.env.API_KEY را تنظیم کنید.");
     }
 
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-    // Strip header if present (e.g., "data:image/jpeg;base64,")
-    const base64Data = base64Image.includes(',') 
-      ? base64Image.split(',')[1] 
-      : base64Image;
+    // استخراج فرمت و دیتای تصویر از رشته Base64
+    const matches = base64Image.match(/^data:(.+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      throw new Error("فرمت تصویر نامعتبر است.");
+    }
+    const mimeType = matches[1];
+    const data = matches[2];
 
+    // ارسال درخواست به مدل ویرایش تصویر جمینای
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: {
         parts: [
           {
             inlineData: {
-              mimeType: 'image/jpeg',
-              data: base64Data
+              mimeType: mimeType,
+              data: data
             }
           },
           {
-            text: "Edit this image. Keep the face, skin, lips, gums and lighting exactly as they are. DO NOT change the face structure. Only modify the teeth to look like high-end, bright white, perfectly shaped ceramic veneers (Hollywood smile). The teeth should look realistic but cosmetically perfect."
+            text: "Edit this photo to give the person a perfect Hollywood smile with bright white ceramic veneers. Ensure realistic skin texture, professional lighting, and highly detailed lips and gums. The result should be photorealistic and maintain the original face identity."
           }
         ]
       }
     });
 
-    // Check for inline data (image) response with safe optional chaining
-    const candidates = response.candidates;
-    if (candidates && candidates.length > 0) {
-      const parts = candidates[0]?.content?.parts;
-      if (parts) {
-        for (const part of parts) {
-          if (part.inlineData && part.inlineData.data) {
-            return `data:image/png;base64,${part.inlineData.data}`;
-          }
+    // استخراج تصویر تولید شده از پاسخ
+    if (response.candidates && response.candidates[0].content && response.candidates[0].content.parts) {
+        for (const part of response.candidates[0].content.parts) {
+            // مدل معمولاً تصویر را به صورت inlineData برمی‌گرداند
+            if (part.inlineData && part.inlineData.data) {
+                return `data:image/png;base64,${part.inlineData.data}`;
+            }
         }
-      }
     }
-    
-    throw new Error("No image generated.");
+
+    throw new Error("تصویری توسط هوش مصنوعی تولید نشد.");
+
   } catch (error) {
-    console.error("Gemini API Error:", error);
+    console.error("Gemini Service Error:", error);
+    // بازگرداندن خطای خوانا برای کاربر
     throw error;
   }
 };
