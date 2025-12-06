@@ -107,13 +107,27 @@ function App() {
       <main className="flex-1 flex flex-col relative overflow-hidden w-full">
         {processState === ProcessState.IDLE && (
           <div className="flex flex-col h-full w-full">
-            {/* Top Section: Intro - Collapses when service is selected */}
-            <div className={`w-full px-4 overflow-hidden transition-all duration-500 ease-in-out ${selectedService ? 'max-h-0 opacity-0' : 'max-h-[300px] opacity-100 flex-1 flex flex-col justify-center'}`}>
+            {/* Top Section: Intro - Smooth collapse with translate */}
+            <div 
+              className={`
+                w-full px-4 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]
+                ${selectedService 
+                  ? 'max-h-0 opacity-0 -translate-y-10' 
+                  : 'max-h-[300px] opacity-100 translate-y-0 flex-1 flex flex-col justify-center'
+                }
+              `}
+            >
                <IntroSection />
             </div>
             
-            {/* Bottom Section: Action - Expands when service selected */}
-            <div className={`w-full px-4 pb-4 pt-2 bg-gray-50 dark:bg-slate-950 z-10 flex flex-col transition-all duration-500 ease-in-out ${selectedService ? 'flex-1 h-full' : 'flex-shrink-0'}`}>
+            {/* Bottom Section: Action - Smooth expansion */}
+            <div 
+              className={`
+                w-full px-4 pb-4 pt-2 bg-gray-50 dark:bg-slate-950 z-10 flex flex-col 
+                transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]
+                ${selectedService ? 'flex-1 h-full' : 'flex-shrink-0'}
+              `}
+            >
               <UploadSection 
                 onImageSelect={handleImageSelect} 
                 processState={processState} 
@@ -125,7 +139,7 @@ function App() {
         )}
 
         {(processState === ProcessState.UPLOADING || processState === ProcessState.PROCESSING) && (
-           <div className="flex-1 flex flex-col justify-center items-center p-8 text-center space-y-6 animate-fade-in relative w-full h-full bg-gray-50 dark:bg-slate-950">
+           <div className="flex-1 flex flex-col justify-center items-center p-8 text-center space-y-6 animate-in fade-in duration-500 relative w-full h-full bg-gray-50 dark:bg-slate-950">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary-500 blur-xl opacity-20 animate-pulse rounded-full"></div>
                 <Loader2 size={64} className="text-primary-600 dark:text-primary-400 animate-spin relative z-10" />

@@ -65,7 +65,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
   const activeServiceConfig = services.find(s => s.id === selectedService);
 
   return (
-    <div className={`w-full transition-all duration-300 flex flex-col h-full ${selectedService ? 'justify-start' : 'justify-end'}`}>
+    <div className={`w-full transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] flex flex-col h-full ${selectedService ? 'justify-start' : 'justify-end'}`}>
       <input
         type="file"
         ref={fileInputRef}
@@ -76,17 +76,18 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
       
       {!selectedService ? (
         // SERVICE SELECTION LIST
-        <div className="flex flex-col gap-3 pb-4 w-full">
+        <div className="flex flex-col gap-3 pb-4 w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div className="w-full text-center mb-4">
              <h2 className="text-xl font-black text-gray-800 dark:text-white">میخوای چیکار کنی؟</h2>
           </div>
           
-          {services.map((service) => (
+          {services.map((service, index) => (
             <button
               key={service.id}
               onClick={() => onSelectService(service.id)}
               disabled={isLoading}
-              className={`w-full ${service.color} ${service.darkColor} border-2 relative group overflow-hidden rounded-2xl p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-all active:scale-[0.98] h-20`}
+              style={{ animationDelay: `${index * 50}ms` }}
+              className={`w-full ${service.color} ${service.darkColor} border-2 relative group overflow-hidden rounded-2xl p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-all active:scale-[0.98] h-20 animate-in slide-in-from-bottom-4 fade-in duration-500 fill-mode-backwards`}
             >
               <div className="bg-white dark:bg-slate-800 p-2.5 rounded-xl shadow-sm shrink-0 transition-colors">
                 {service.icon}
@@ -100,7 +101,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
         </div>
       ) : (
         // UPLOAD ACTION AREA WITH ROADMAP
-        <div className="animate-in slide-in-from-bottom-8 duration-500 flex flex-col h-full w-full">
+        <div className="animate-in fade-in slide-in-from-bottom-12 duration-700 ease-out flex flex-col h-full w-full">
           
           {/* Header */}
           <div className="flex items-center justify-between mb-6 flex-shrink-0">
@@ -117,12 +118,12 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           </div>
 
           {/* Roadmap Steps */}
-          <div className="flex-1 w-full px-4 relative flex flex-col gap-6 overflow-y-auto">
+          <div className="flex-1 w-full px-4 relative flex flex-col gap-6 overflow-y-auto custom-scrollbar">
              {/* Vertical Line */}
              <div className="absolute top-4 bottom-12 right-[2.25rem] w-0.5 bg-gray-100 dark:bg-slate-800 -z-10"></div>
 
              {/* Step 1: Upload (Active) */}
-             <div className="flex gap-4 relative">
+             <div className="flex gap-4 relative animate-in slide-in-from-right-4 duration-700 delay-100 fill-mode-backwards">
                 <div className="flex flex-col items-center">
                     <div className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center shadow-lg shadow-primary-200 dark:shadow-none ring-4 ring-primary-50 dark:ring-primary-900/20 z-10">
                         <UploadCloud size={20} />
@@ -140,7 +141,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
              </div>
 
              {/* Step 2: AI Processing (Inactive) */}
-             <div className="flex gap-4 opacity-50 grayscale">
+             <div className="flex gap-4 opacity-50 grayscale animate-in slide-in-from-right-4 duration-700 delay-200 fill-mode-backwards">
                 <div className="flex flex-col items-center">
                     <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 text-gray-400 dark:text-gray-500 flex items-center justify-center z-10">
                         <Sparkles size={20} />
@@ -153,7 +154,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
              </div>
 
              {/* Step 3: Discount (Inactive) */}
-             <div className="flex gap-4 opacity-50 grayscale">
+             <div className="flex gap-4 opacity-50 grayscale animate-in slide-in-from-right-4 duration-700 delay-300 fill-mode-backwards">
                 <div className="flex flex-col items-center">
                     <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 text-gray-400 dark:text-gray-500 flex items-center justify-center z-10">
                         <Ticket size={20} />
@@ -166,7 +167,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
              </div>
 
              {/* Step 4: Visit (Inactive) */}
-             <div className="flex gap-4 opacity-50 grayscale">
+             <div className="flex gap-4 opacity-50 grayscale animate-in slide-in-from-right-4 duration-700 delay-500 fill-mode-backwards">
                 <div className="flex flex-col items-center">
                     <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 text-gray-400 dark:text-gray-500 flex items-center justify-center z-10">
                         <MapPin size={20} />
@@ -183,10 +184,10 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={isLoading}
-            className="w-full bg-gray-900 dark:bg-white hover:bg-black dark:hover:bg-gray-100 text-white dark:text-gray-900 rounded-2xl p-4 flex items-center justify-center gap-3 shadow-xl shadow-gray-200 dark:shadow-none active:scale-[0.98] transition-all duration-200 group h-16 mt-4 flex-shrink-0 z-20"
+            className="w-full bg-gray-900 dark:bg-white hover:bg-black dark:hover:bg-gray-100 text-white dark:text-gray-900 rounded-2xl p-4 flex items-center justify-center gap-3 shadow-xl shadow-gray-200 dark:shadow-none active:scale-[0.98] transition-all duration-200 group h-16 mt-4 mb-6 flex-shrink-0 z-20"
           >
             <Camera size={24} className="group-hover:rotate-12 transition-transform" />
-            <span className="text-base font-bold">شروع کنید (انتخاب عکس)</span>
+            <span className="text-base font-bold">انتخاب تصویر چهره شما</span>
           </button>
         </div>
       )}
