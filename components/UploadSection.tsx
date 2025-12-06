@@ -118,9 +118,9 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           </div>
 
           {/* Roadmap Steps */}
-          <div className="flex-1 w-full px-4 relative flex flex-col gap-6 overflow-y-auto custom-scrollbar">
+          <div className="flex-1 w-full px-4 pt-6 relative flex flex-col gap-6 overflow-y-auto custom-scrollbar">
              {/* Vertical Line */}
-             <div className="absolute top-4 bottom-12 right-[2.25rem] w-0.5 bg-gray-100 dark:bg-slate-800 -z-10"></div>
+             <div className="absolute top-6 bottom-12 right-[2.25rem] w-0.5 bg-gray-100 dark:bg-slate-800 -z-10"></div>
 
              {/* Step 1: Upload (Active) */}
              <div className="flex gap-4 relative animate-in slide-in-from-right-4 duration-700 delay-100 fill-mode-backwards">
