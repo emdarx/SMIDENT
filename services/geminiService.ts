@@ -1,3 +1,4 @@
+
 import { GoogleGenAI } from "@google/genai";
 import { ServiceType } from "../types";
 
@@ -29,6 +30,9 @@ export const generateBeautyMakeover = async (base64Image: string, serviceType: S
         break;
       case 'LIFT':
         prompt = "Edit this photo to apply a temporal eyebrow lift (fox eye look) to the person. Lift the tails of the eyebrows upwards and slightly outwards for a rejuvenated, attractive look. Smooth the forehead slightly. Maintain the original eye color, nose, and mouth exactly. The result must be photorealistic.";
+        break;
+      case 'BOTOX':
+        prompt = "Edit this photo to apply a cosmetic botox treatment. Significantly reduce and smooth out wrinkles on the forehead, glabella (between eyebrows), and crow's feet around the eyes. The skin should look smoother and younger but still retain natural skin texture. Do not change facial features or identity. The result must be photorealistic.";
         break;
       default:
         prompt = "Enhance the beauty of this face while keeping it realistic.";

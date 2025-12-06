@@ -1,5 +1,6 @@
+
 import React, { useRef } from 'react';
-import { Camera, Smile, Syringe, MoveUp, ArrowLeft, ScanFace } from 'lucide-react';
+import { Camera, Smile, Syringe, MoveUp, ArrowLeft, ScanFace, Sparkles } from 'lucide-react';
 import { ProcessState, ServiceType } from '../types';
 
 interface UploadSectionProps {
@@ -47,6 +48,13 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
       icon: <MoveUp size={28} />,
       color: 'bg-indigo-50 text-indigo-500 border-indigo-100',
       instruction: 'لطفاً مطمئن شوید پیشانی و ابروها با مو پوشانده نشده باشند.'
+    },
+    {
+      id: 'BOTOX' as ServiceType,
+      title: 'بوتاکس صورت',
+      icon: <Sparkles size={28} />,
+      color: 'bg-purple-50 text-purple-600 border-purple-100',
+      instruction: 'لطفاً عکس تمام رخ بگیرید که پیشانی و خطوط صورت مشخص باشد.'
     }
   ];
 

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Header } from './components/Header';
 import { IntroSection } from './components/IntroSection';
@@ -91,6 +92,16 @@ function App() {
     // or they can press "Back" in UploadSection to change service.
   };
 
+  const getServiceNameFA = (type: ServiceType | null) => {
+    switch(type) {
+      case 'DENTAL': return 'لمینت';
+      case 'FILLER': return 'ژل گونه';
+      case 'LIFT': return 'لیفت ابرو';
+      case 'BOTOX': return 'بوتاکس';
+      default: return 'زیبایی';
+    }
+  };
+
   return (
     <div className="h-[100dvh] w-full bg-gray-50 text-gray-800 font-sans flex flex-col overflow-hidden max-w-md mx-auto shadow-2xl relative">
       <Header />
@@ -126,7 +137,7 @@ function App() {
               <div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">در حال زیباسازی...</h3>
                 <p className="text-sm text-gray-500 leading-relaxed max-w-[250px] mx-auto">
-                  هوش مصنوعی در حال اعمال تغییرات {selectedService === 'DENTAL' ? 'لمینت' : selectedService === 'FILLER' ? 'ژل گونه' : 'لیفت ابرو'} روی چهره شماست.
+                  هوش مصنوعی در حال اعمال تغییرات {getServiceNameFA(selectedService)} روی چهره شماست.
                 </p>
               </div>
 

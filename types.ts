@@ -1,3 +1,4 @@
+
 export interface DiscountData {
   code: string;
   percent: number;
@@ -11,7 +12,7 @@ export enum ProcessState {
   ERROR = 'ERROR'
 }
 
-export type ServiceType = 'DENTAL' | 'FILLER' | 'LIFT';
+export type ServiceType = 'DENTAL' | 'FILLER' | 'LIFT' | 'BOTOX';
 
 export interface ServiceConfig {
   id: ServiceType;
