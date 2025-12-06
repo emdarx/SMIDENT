@@ -88,8 +88,6 @@ function App() {
     setDiscount(null);
     setProcessState(ProcessState.IDLE);
     setErrorMessage(null);
-    // Note: We intentionally keep selectedService so user can try again easily, 
-    // or they can press "Back" in UploadSection to change service.
   };
 
   const getServiceNameFA = (type: ServiceType | null) => {
@@ -103,21 +101,19 @@ function App() {
   };
 
   return (
-    <div className="h-[100dvh] w-full bg-gray-50 text-gray-800 font-sans flex flex-col overflow-hidden max-w-md mx-auto shadow-2xl relative">
+    <div className="h-[100dvh] w-full bg-gray-50 dark:bg-slate-950 text-gray-800 dark:text-gray-100 font-sans flex flex-col overflow-hidden max-w-md mx-auto shadow-2xl relative transition-colors duration-300">
       <Header />
 
       <main className="flex-1 flex flex-col relative overflow-hidden w-full">
         {processState === ProcessState.IDLE && (
           <div className="flex flex-col h-full w-full">
-            {/* Top Section: Intro - Hidden when service is selected */}
-            {!selectedService && (
-              <div className="flex-1 flex flex-col justify-center items-center px-4 overflow-hidden w-full animate-in fade-in slide-in-from-top-4 duration-500">
-                 <IntroSection />
-              </div>
-            )}
+            {/* Top Section: Intro - Collapses when service is selected */}
+            <div className={`w-full px-4 overflow-hidden transition-all duration-500 ease-in-out ${selectedService ? 'max-h-0 opacity-0' : 'max-h-[300px] opacity-100 flex-1 flex flex-col justify-center'}`}>
+               <IntroSection />
+            </div>
             
             {/* Bottom Section: Action - Expands when service selected */}
-            <div className={`w-full px-4 pb-4 pt-2 bg-gray-50 z-10 flex flex-col transition-all duration-500 ease-in-out ${selectedService ? 'flex-1 h-full' : 'flex-shrink-0 min-h-[200px]'}`}>
+            <div className={`w-full px-4 pb-4 pt-2 bg-gray-50 dark:bg-slate-950 z-10 flex flex-col transition-all duration-500 ease-in-out ${selectedService ? 'flex-1 h-full' : 'flex-shrink-0'}`}>
               <UploadSection 
                 onImageSelect={handleImageSelect} 
                 processState={processState} 
@@ -129,14 +125,14 @@ function App() {
         )}
 
         {(processState === ProcessState.UPLOADING || processState === ProcessState.PROCESSING) && (
-           <div className="flex-1 flex flex-col justify-center items-center p-8 text-center space-y-6 animate-fade-in relative w-full h-full">
+           <div className="flex-1 flex flex-col justify-center items-center p-8 text-center space-y-6 animate-fade-in relative w-full h-full bg-gray-50 dark:bg-slate-950">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary-500 blur-xl opacity-20 animate-pulse rounded-full"></div>
-                <Loader2 size={64} className="text-primary-600 animate-spin relative z-10" />
+                <Loader2 size={64} className="text-primary-600 dark:text-primary-400 animate-spin relative z-10" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">در حال زیباسازی...</h3>
-                <p className="text-sm text-gray-500 leading-relaxed max-w-[250px] mx-auto">
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">در حال زیباسازی...</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-[250px] mx-auto">
                   هوش مصنوعی در حال اعمال تغییرات {getServiceNameFA(selectedService)} روی چهره شماست.
                 </p>
               </div>
@@ -145,13 +141,13 @@ function App() {
               {notifPermission !== 'granted' ? (
                 <button 
                   onClick={requestNotification}
-                  className="mt-8 flex items-center gap-2 bg-white border border-primary-200 text-primary-700 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm active:scale-95 transition-all"
+                  className="mt-8 flex items-center gap-2 bg-white dark:bg-slate-800 border border-primary-200 dark:border-slate-700 text-primary-700 dark:text-primary-400 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm active:scale-95 transition-all"
                 >
                   <Bell size={16} />
                   <span>وقتی آماده شد خبرم کن</span>
                 </button>
               ) : (
-                <div className="mt-8 flex items-center gap-2 text-primary-600 bg-primary-50 px-4 py-2 rounded-xl text-xs font-bold">
+                <div className="mt-8 flex items-center gap-2 text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 px-4 py-2 rounded-xl text-xs font-bold">
                    <BellRing size={16} />
                    <span>به شما اطلاع خواهیم داد</span>
                 </div>
@@ -169,14 +165,14 @@ function App() {
         )}
 
         {processState === ProcessState.ERROR && (
-          <div className="flex-1 flex flex-col justify-center items-center p-8 text-center gap-6 w-full h-full">
-            <div className="bg-red-50 text-red-600 p-6 rounded-2xl border border-red-100 w-full">
+          <div className="flex-1 flex flex-col justify-center items-center p-8 text-center gap-6 w-full h-full bg-gray-50 dark:bg-slate-950">
+            <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-6 rounded-2xl border border-red-100 dark:border-red-900/50 w-full">
               <p className="font-bold text-lg mb-2">خطا</p>
               <p className="text-sm opacity-90">{errorMessage}</p>
             </div>
             <button 
               onClick={handleReset}
-              className="bg-gray-800 text-white h-14 rounded-xl font-bold w-full active:scale-95 transition-transform"
+              className="bg-gray-800 dark:bg-gray-700 text-white h-14 rounded-xl font-bold w-full active:scale-95 transition-transform"
             >
               تلاش مجدد
             </button>
