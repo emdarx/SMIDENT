@@ -11,7 +11,7 @@ export const IntroSection: React.FC = () => {
         </h2>
         
         <p className="text-base md:text-lg text-gray-600 max-w-[320px] mx-auto leading-relaxed font-medium">
-          در اپ اسمیدنت، پیش از مراجعه حضوری به مرکز زیبایی ابتدا پیش نمایشی از آن چه خواهید شد را ببینید
+          در اسمیدنت، پیش از مراجعه حضوری به مرکز زیبایی ابتدا پیش نمایشی از آن چه خواهید شد را ببینید
         </p>
       </div>
       

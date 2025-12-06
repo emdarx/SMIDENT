@@ -91,7 +91,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
         <div className="animate-in slide-in-from-bottom-8 duration-500 flex flex-col h-full">
           
           {/* Header */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 flex-shrink-0">
             <button 
               onClick={() => onSelectService(null)}
               className="text-gray-500 hover:text-gray-800 flex items-center gap-1.5 text-sm font-bold px-3 py-2 rounded-xl hover:bg-gray-100 transition-colors"
@@ -105,10 +105,10 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           </div>
 
           {/* Visual Guide Container */}
-          <div className="flex-1 w-full bg-gray-100 rounded-3xl mb-6 relative overflow-hidden border border-gray-200 flex items-center justify-center min-h-[250px]">
+          <div className="flex-1 w-full bg-gray-100 rounded-3xl mb-6 relative overflow-hidden border border-gray-200 flex items-center justify-center min-h-[200px]">
              {/* Abstract Face Guide Visualization */}
              <div className="relative text-gray-300">
-                <ScanFace size={160} strokeWidth={1} />
+                <ScanFace size={140} strokeWidth={1} />
                 
                 {/* Focus Corners */}
                 <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary-500 rounded-tl-xl -translate-x-4 -translate-y-4"></div>
@@ -116,14 +116,10 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
                 <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary-500 rounded-bl-xl -translate-x-4 translate-y-4"></div>
                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary-500 rounded-br-xl translate-x-4 translate-y-4"></div>
              </div>
-
-             <div className="absolute bottom-4 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-bold text-gray-600 shadow-sm border border-white">
-                راهنمای عکاسی
-             </div>
-          </div>
+          </div> 
 
           {/* Instruction Text */}
-          <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center mb-4">
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center mb-4 flex-shrink-0">
             <p className="text-sm text-blue-900 leading-relaxed font-bold">
               {activeServiceConfig?.instruction}
             </p>
@@ -133,7 +129,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={isLoading}
-            className="w-full bg-gray-900 hover:bg-black text-white rounded-2xl p-4 flex items-center justify-center gap-3 shadow-xl shadow-gray-200 active:scale-[0.98] transition-all duration-200 group h-16 mt-auto mb-4"
+            className="w-full bg-gray-900 hover:bg-black text-white rounded-2xl p-4 flex items-center justify-center gap-3 shadow-xl shadow-gray-200 active:scale-[0.98] transition-all duration-200 group h-16 mt-auto mb-4 flex-shrink-0"
           >
             <Camera size={24} />
             <span className="text-base font-bold">انتخاب تصویر یا گرفتن عکس</span>
