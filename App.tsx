@@ -3,31 +3,40 @@ import { Header } from './components/Header';
 import { IntroSection } from './components/IntroSection';
 import { UploadSection } from './components/UploadSection';
 import { ResultSection } from './components/ResultSection';
-import { generateSmileMakeover } from './services/geminiService';
+import { generateBeautyMakeover } from './services/geminiService';
 import { generateDiscountCode } from './utils/discount';
-import { DiscountData, ProcessState } from './types';
+import { DiscountData, ProcessState, ServiceType } from './types';
 import { Loader2, Bell, BellRing } from 'lucide-react';
 
 function App() {
   const [processState, setProcessState] = useState<ProcessState>(ProcessState.IDLE);
+  const [selectedService, setSelectedService] = useState<ServiceType | null>(null);
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [resultImage, setResultImage] = useState<string | null>(null);
   const [discount, setDiscount] = useState<DiscountData | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [notifPermission, setNotifPermission] = useState<NotificationPermission>(Notification.permission);
+  
+  // Safe initialization of notification permission
+  const [notifPermission, setNotifPermission] = useState<NotificationPermission>(() => {
+    if (typeof Notification !== 'undefined') {
+      return Notification.permission;
+    }
+    return 'default';
+  });
 
   const requestNotification = () => {
-    Notification.requestPermission().then(permission => {
-      setNotifPermission(permission);
-    });
+    if (typeof Notification !== 'undefined') {
+      Notification.requestPermission().then(permission => {
+        setNotifPermission(permission);
+      });
+    }
   };
 
   const sendSuccessNotification = () => {
-    if (Notification.permission === 'granted') {
+    if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
       try {
-        // Cast options to any to allow 'vibrate' if supported by browser, bypassing TS check
         const options: any = {
-          body: 'طراحی لبخند شما آماده است! 😍 برای مشاهده نتیجه کلیک کنید.',
+          body: 'تغییر چهره شما آماده است! 😍 برای مشاهده نتیجه کلیک کنید.',
           icon: 'https://cdn-icons-png.flaticon.com/512/2913/2913504.png',
           vibrate: [200, 100, 200]
         };
@@ -39,6 +48,8 @@ function App() {
   };
 
   const handleImageSelect = async (file: File) => {
+    if (!selectedService) return;
+
     setErrorMessage(null);
     setProcessState(ProcessState.UPLOADING);
 
@@ -49,13 +60,12 @@ function App() {
       setProcessState(ProcessState.PROCESSING);
 
       try {
-        const generatedImage = await generateSmileMakeover(base64);
+        const generatedImage = await generateBeautyMakeover(base64, selectedService);
         setResultImage(generatedImage);
         const discountData = generateDiscountCode();
         setDiscount(discountData);
         setProcessState(ProcessState.SUCCESS);
         
-        // Send notification if permitted
         sendSuccessNotification();
 
       } catch (error: any) {
@@ -77,6 +87,8 @@ function App() {
     setDiscount(null);
     setProcessState(ProcessState.IDLE);
     setErrorMessage(null);
+    // Note: We intentionally keep selectedService so user can try again easily, 
+    // or they can press "Back" in UploadSection to change service.
   };
 
   return (
@@ -86,20 +98,21 @@ function App() {
       <main className="flex-1 flex flex-col relative overflow-hidden w-full">
         {processState === ProcessState.IDLE && (
           <div className="flex flex-col h-full w-full">
-            {/* Top Section: Intro - Flexible Space */}
-            <div className="flex-1 flex flex-col justify-center items-center px-4 overflow-hidden w-full">
-               <IntroSection />
-            </div>
+            {/* Top Section: Intro - Hidden when service is selected */}
+            {!selectedService && (
+              <div className="flex-1 flex flex-col justify-center items-center px-4 overflow-hidden w-full animate-in fade-in slide-in-from-top-4 duration-500">
+                 <IntroSection />
+              </div>
+            )}
             
-            {/* Bottom Section: Action - Fixed Height */}
-            <div className="flex-shrink-0 w-full px-4 pb-6 pt-2 bg-gray-50 z-10">
+            {/* Bottom Section: Action - Expands when service selected */}
+            <div className={`w-full px-4 pb-4 pt-2 bg-gray-50 z-10 flex flex-col transition-all duration-500 ease-in-out ${selectedService ? 'flex-1 h-full' : 'flex-shrink-0 min-h-[200px]'}`}>
               <UploadSection 
                 onImageSelect={handleImageSelect} 
                 processState={processState} 
+                selectedService={selectedService}
+                onSelectService={setSelectedService}
               />
-              <p className="text-center text-gray-400 text-[10px] mt-3 opacity-60">
-                نسخه ۱.۰.۰ 
-              </p>
             </div>
           </div>
         )}
@@ -111,9 +124,9 @@ function App() {
                 <Loader2 size={64} className="text-primary-600 animate-spin relative z-10" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">در حال طراحی لبخند...</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">در حال زیباسازی...</h3>
                 <p className="text-sm text-gray-500 leading-relaxed max-w-[250px] mx-auto">
-                  هوش مصنوعی در حال آنالیز فرم صورت و دندان‌های شماست.
+                  هوش مصنوعی در حال اعمال تغییرات {selectedService === 'DENTAL' ? 'لمینت' : selectedService === 'FILLER' ? 'ژل گونه' : 'لیفت ابرو'} روی چهره شماست.
                 </p>
               </div>
 

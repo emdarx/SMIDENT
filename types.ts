@@ -11,6 +11,16 @@ export enum ProcessState {
   ERROR = 'ERROR'
 }
 
+export type ServiceType = 'DENTAL' | 'FILLER' | 'LIFT';
+
+export interface ServiceConfig {
+  id: ServiceType;
+  title: string;
+  icon: any; // React component
+  description: string;
+  instruction: string;
+}
+
 export interface ContactInfo {
   address: string;
   phone1: string;

@@ -11,8 +11,8 @@ export const Header: React.FC = () => {
           </div>
           <h1 className="text-xl font-bold text-gray-800">SMIDENT</h1>
         </div>
-        <span className="text-xs font-medium text-primary-600 bg-primary-50 px-2 py-1 rounded-full">
-         ساخته شده با عشق ❤️
+        <span className="text-xs font-bold text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full border border-primary-100">
+         مرکز زیبایی اسمیدنت
         </span>
       </div>
     </header>
